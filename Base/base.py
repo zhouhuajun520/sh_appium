@@ -2,7 +2,7 @@ from time import sleep
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
-
+import allure
 
 class Base():
     def __init__(self, driver):
@@ -22,7 +22,7 @@ class Base():
         send_1 = self.element(aa)
         send_1.clear()
         send_1.send_keys(text)
-
+    @allure.step("滑动")
     def huadong(self, tag=1):
         sleep(2)
         ha = self.driver.get_window_size()
@@ -30,19 +30,23 @@ class Base():
         gao = ha.get("height")
         #向上滑动
         if tag == 1:
+            allure.attach("向上", "输入参数：1")
             self.driver.swipe(kuang * 0.5, gao * 0.8, kuang * 0.5, gao * 0.3,1000)
         #向下
         if tag == 2:
+            allure.attach("向下", "输入参数：2")
             self.driver.swipe(kuang * 0.5, gao * 0.3, kuang * 0.5, gao * 0.8,1000)
         #向左
         if tag == 3:
+            allure.attach("向左", "输入参数：3")
             self.driver.swipe(kuang * 0.8, gao * 0.5, kuang * 0.3, gao * 0.5,1000)
         #向右
         if tag == 4:
+            allure.attach("向右", "输入参数：4")
             self.driver.swipe(kuang * 0.3, gao * 0.5, kuang * 0.8, gao * 0.5,1000)
 
     def get_toast(self, mess):
-
+        allure.attach("获取提出框信息", mess)
         toast_xpath = "//*[contains(@text,'{}')]".format(mess)
         toast_message = self.element((By.XPATH, toast_xpath), timeout=5, poll_frequency=0.5).text
         return toast_message
