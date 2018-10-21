@@ -8,4 +8,4 @@ def get_d(a , b):
     desired_caps['automationName'] = 'Uiautomator2'
     desired_caps['appPackage'] = a
     desired_caps['appActivity'] = b
-    return webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
+    return webdriver.Remote('http://192.168.45.25:4723/wd/hub', desired_caps)
